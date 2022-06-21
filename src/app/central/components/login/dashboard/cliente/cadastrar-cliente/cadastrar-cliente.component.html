@@ -1,0 +1,243 @@
+<fieldset class="border p-4">
+  <p-messages [(value)]="msgs"></p-messages>
+  <div class="card-header py-3">
+    <p class="text-primary m-0 font-weight-bold">
+      Cliente(s)
+      <button type="button" (click)="voltar();" style="margin: 0 3px;" class="btn btn-danger btn-sm float-right">
+        <i class="fa fa fa-plus"> Cancelar</i>
+      </button>
+      
+      <button type="reset" (click)="limpar();" *ngIf="isEdicao" style="margin: 0 3px;" class="btn btn-warning btn-sm float-right">
+        <i class="fa fa fa-plus"> Limpar</i>
+      </button>
+  
+      <button type="button" (click)="salvar();" *ngIf="isEdicao" style="margin: 0 3px;" class="btn btn-primary btn-sm float-right">
+        <i class="fa fa fa-plus"> Salvar</i>
+      </button>
+    </p>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+
+      <div class="col-md-6">
+          <div class="form-group">
+              <label>Nome: *</label>
+              <input type="text" 
+                    required
+                    name="nomeFantasia" 
+                    class="form-control" 
+                    maxlength="80" 
+                    [disabled]="!isEdicao"
+                    [(ngModel)]="clienteCadastro.nomeFantasia" >
+          </div>
+      </div>
+
+      <div class="col-md-3">
+          <div class="form-group">
+              <label>Código: *</label>
+              <input type="text"
+                    required
+                    name="codigo"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                    class="form-control" id="codigo" 
+                    [disabled]="!isEdicao"
+                    [(ngModel)]="clienteCadastro.codigo" >
+          </div>
+      </div>
+      
+      <div class="col-md-3">
+          <div class="form-group">
+              <label>CNPJ: *</label>
+              <input type="text"
+                    required
+                    name="cnpj"
+                    mask="00.000.000/0000-00"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                    class="form-control" 
+                    [disabled]="!isEdicao"
+                    [(ngModel)]="clienteCadastro.cnpj" >
+          </div>
+      </div>
+
+      <hr/>
+
+      <div class="col-md-12">
+        <fieldset class="border p-2" *ngFor="let sistema of sistemas; index as i">
+          <legend  class="w-auto">
+              <input id="botAtivo" type="checkbox" value="true" [(ngModel)]="configuracaoClienteDTO.botAtivo" name="botAtivo" >
+              Configurações para o Bot          
+          </legend>
+          
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Sistema: </label>
+                <br/>
+                <input type="text"
+                       required
+                       name="descricao"
+                       [disabled]="true"
+                       class="form-control"
+                       [(ngModel)]="sistema.descricao" >                
+              </div>
+            </div>
+
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>Endereço: </label>
+                <br/>
+                <input type="text"
+                       required
+                       name="url"
+                       [disabled]="true"
+                       class="form-control"
+                       [(ngModel)]="sistema.url" >
+              </div>
+            </div>          
+          </div>
+          
+          <div class="row">
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Login: *</label>
+                <input type="text"
+                       required
+                       placeholder="Login"
+                       name="login"
+                       class="form-control"
+                       maxlength="50"
+                       [disabled]="!isEdicao"
+                       [(ngModel)]="configuracaoClienteDTO.login" >
+              </div>
+
+              <hr/>
+
+              <div class="form-group">
+                <label>Senha: *</label>
+                <input type="text"
+                       placeholder="Senha"
+                       required
+                       name="senha"
+                       class="form-control"
+                       maxlength="10"
+                       [disabled]="!isEdicao"
+                       [(ngModel)]="configuracaoClienteDTO.senha" >
+                       
+              </div>
+
+            </div>
+
+            <div class="col-md-2">
+              <label>Habilitações: </label>
+              <br/>
+              <br/>
+              <div class="form-group">
+                <fieldset class="card-header border p-2"  >
+                  <label>Declaração: </label>
+                  <br/>
+                  <input id="flagDeclaracaoPre" type="checkbox" 
+                         [disabled]="!isEdicao"
+                         value="true" 
+                         [(ngModel)]="configuracaoClienteDTO.flagDeclaracaoPre" 
+                         name="flagDeclaracaoPre" >
+                  <label for="flagDeclaracaoPre">&nbsp;Prestador</label>
+                  <br/>
+                  <input id="flagDeclaracaoTom" 
+                         [disabled]="!isEdicao" 
+                         type="checkbox" 
+                         value="true" 
+                         [(ngModel)]="configuracaoClienteDTO.flagDeclaracaoTom" 
+                         name="flagDeclaracaoTom" >
+                  <label for="flagDeclaracaoTom">&nbsp;Tomador</label>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <label>&nbsp; </label>
+              <br/>
+              <br/>
+              <div class="form-group">
+                <fieldset class="card-header border p-2"  >
+                  <label>Livro</label>
+                  <br/>
+                  <input id="flagLivroPre" 
+                         type="checkbox" 
+                         [disabled]="!isEdicao"
+                         value="true" 
+                         [(ngModel)]="configuracaoClienteDTO.flagLivroPre" 
+                         name="flagLivroPre" >
+                  <label for="flagLivroPre">&nbsp;Prestador</label>
+                  <br/>
+                  <input id="flagLivroTom" 
+                         type="checkbox" 
+                         [disabled]="!isEdicao"
+                         value="true" 
+                         [(ngModel)]="configuracaoClienteDTO.flagLivroTom" 
+                         name="flagLivroTom" >
+                  <label for="flagLivroTom">&nbsp;Tomador</label>
+                </fieldset>
+              </div>            
+            </div>
+            
+            <div class="col-md-2">
+              <label>&nbsp; </label>
+              <br/>
+              <br/>
+              <div class="form-group">
+                <fieldset class="card-header border p-2"  >
+                  <label>XML</label>
+                  <br/>
+                  <input id="flagXmlPre" 
+                         type="checkbox" 
+                         [disabled]="!isEdicao"
+                         value="true" 
+                         [(ngModel)]="configuracaoClienteDTO.flagXmlPre" 
+                         name="flagXmlPre" >
+                  <label for="flagXmlPre">&nbsp;Prestador</label>
+                  <br/>
+                  <input id="flagXmlTom" 
+                         type="checkbox" 
+                         [disabled]="!isEdicao"
+                         value="true" 
+                         [(ngModel)]="configuracaoClienteDTO.flagXmlTom" 
+                         name="flagXmlTom" >
+                  <label for="flagXmlTom">&nbsp;Tomador</label>
+                </fieldset>
+              </div>
+            </div>
+      
+            <div class="col-md-2">
+              <label>&nbsp; </label>
+              <br/>
+              <br/>
+              <div class="form-group">
+                <fieldset class="card-header border p-2"  >
+                  <label>ISS</label>
+                  <br/>
+                  <input id="flagIssPre" 
+                         type="checkbox" 
+                         [disabled]="!isEdicao"
+                         value="true" [(ngModel)]="configuracaoClienteDTO.flagIssPre" 
+                         name="flagIssPre" >
+                  <label for="flagIssPre">&nbsp;Prestador</label>
+                  <br/>
+                  <input id="flagIssTom" 
+                         [disabled]="!isEdicao"
+                         type="checkbox" value="true" 
+                         [(ngModel)]="configuracaoClienteDTO.flagIssTom" 
+                         name="flagIssTom" >
+                  <label for="flagIssTom">&nbsp;Tomador</label>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+
+
+        </fieldset>
+    </div>
+  </div>
+</fieldset>

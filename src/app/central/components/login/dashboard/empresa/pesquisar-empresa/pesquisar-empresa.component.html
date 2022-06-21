@@ -1,0 +1,96 @@
+<fieldset class="border p-4">
+  <p-messages [(value)]="msgs"></p-messages>
+  <div class="card-header py-3">
+    <p class="text-primary m-0 font-weight-bold">
+      Empresa(s)
+      <button type="button" (click)="novo();" class="btn btn-primary btn-sm float-right">
+        <i class="fa fa fa-plus"> Novo</i>
+      </button>
+      <button type="button" (click)="open(filtrar)" style="margin: 0 5px;" class="btn btn-primary btn-sm float-right">
+        <i class="fa fa fa-filter"> Filtrar</i>
+      </button>
+    </p>
+  </div>
+
+  <!-- INICIO - REMOVER -->
+  <ng-template #remove let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Deseja remover o usuário: </h4>
+    </div>
+    <div class="modal-body">
+    {{empresa.cnpj}}
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-sm btn-danger" (click)="close()">Fechar</button>
+      <button type="button" class="btn btn-sm btn-primary" (click)="confirmaRemover()">Remover</button>
+    </div>
+  </ng-template>
+  <!-- FIM - REMOVER -->
+
+    <!-- INICIO - FILTRAR -->
+    <ng-template #filtrar let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Aplicar</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" 
+                 placeholder="CNPJ" 
+                 class="form-control" 
+                 mask="00.000.000/0000-00" 
+                 [(ngModel)]="empresaFiltro.cnpj" >
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="Nome" class="form-control" [(ngModel)]="empresaFiltro.nome" >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-danger" (click)="close()">Fechar</button>
+        <button type="reset" class="btn btn-sm btn-warning" (click)="limpar()">Limpar Campos</button>
+        <button type="button" class="btn btn-sm btn-primary" (click)="buscar()">Aplicar Filtro</button>
+      </div>
+    </ng-template>
+    <!-- FIM - FILTRAR -->
+
+  <!-- INICIO - LISTAR -->
+  <div class="card-body">
+      <div class="row">
+        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+          <table class="table my-0" id="dataTable">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th style="width: 350px;">Empresa</th>
+                <th>CNPJ</th>
+                <th style="width: 350px;">Email</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let empresa of empresas">
+                <td>{{empresa.id}}</td>
+                <td>{{empresa.nome}}</td>
+                <td>{{empresa.cnpj | mask: '00.000.000/0000-00'}}</td>
+                <td>{{empresa.usuarioDTO.email}}</td>
+                <td>
+                  <div class="btn-toolbar">
+                      <button type="button" style="margin: 0 2px;" (click)="editar(empresa, false);" class="btn btn-warning btn-sm"><i class="fa fa-search"></i></button> 
+                      <button type="button" style="margin: 0 2px;" (click)="editar(empresa, true);" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></button> 
+                      <!-- button type="button" style="margin: 0 2px;" (click)="remover(empresa); open(remove);" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button --> 
+                  </div>
+                </td>
+            </tbody>
+          </table>
+          <p-paginator
+                [rows]="size"
+                [totalRecords]="totalElementos"
+                (onPageChange)="paginate($event)">
+          </p-paginator>
+        </div>
+      </div>
+  </div>
+</fieldset>
+<!-- FIM - LISTAR -->

@@ -1,0 +1,39 @@
+html, body
+	height: 100%
+	display: table
+	margin: 0
+	padding: 0
+	width: 100%
+	display: table
+	position: relative
+	font-family: $font-basic
+
+
+//*
+//	box-shadow: 0 0 1px rgba(0,0,0,0.5)
+
+#body-content
+	height: 100%
+	display: flex
+	flex-direction: row
+	background: $body-background
+	
+	#sidebar
+		width: $sidebar-width
+		@media (max-width: $layout-breakpoint-medium)
+			display: none
+			position: absolute
+			top: 0
+			width: 100%
+			height: 100%
+			z-index: 100
+			&.sidebar-open
+				display: block
+
+	#page
+		height: 100%
+		width:	calc(100% - 250px)
+		margin-left: $margin-page
+		@media (max-width: $layout-breakpoint-medium)
+			width: 100%
+		

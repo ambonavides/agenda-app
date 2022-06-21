@@ -1,0 +1,49 @@
+// LAYOUT
+
+// Break point
+$layout-breakpoint-medium: 768px
+
+
+// BG COLORS
+$orange: #f7920b
+$grey: #efefef
+$dark-grey: #949494
+$black: rgba(0, 0, 0, 0.95)
+$green: #53ad58
+$pink: #d62466
+$blue: #17bcd0
+$red: #d51d1d
+
+$base-color: $green
+$neutral-color: $grey
+
+$body-background: #eee
+$sidebar-background: rgba(0,0,0,0.95)
+$menu-item-background: $base-color
+
+// FONT COLORS
+$sidebar-color: #feffff
+
+// FONT FAMILY
+$font-basic: 'Roboto', sans-serif
+$font-condensed: 'Roboto Condensed', sans-serif
+
+// SIDEBAR
+$sidebar-width: 250px
+
+// GENERAL
+$margin-page: 30px
+$card-padding: 20px
+$border-radius: 3px
+$border-radius-g: 10px
+
+//
+$full-width-sidebar: $sidebar-width + $margin-page
+
+
+// Mixins
+@mixin clear-after
+	&:after
+		content: ""
+		clear: both
+		display: table

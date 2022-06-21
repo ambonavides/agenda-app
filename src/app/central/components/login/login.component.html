@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-9 col-lg-12 col-xl-5">
+            <div class="card shadow-lg o-hidden border-0 my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h4 class="text-dark mb-4">Seja bem-vindo!</h4>
+                                </div>
+                                <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                                    <div class="form-group">
+                                        <label for="username">Login</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               name="username"
+                                               [(ngModel)]="form.username"
+                                               required
+                                               #username="ngModel" />
+                                        <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">
+                                            Usuário é obrigatório.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Senha</label>
+                                        <input type="password"
+                                               class="form-control"
+                                               name="password"
+                                               [(ngModel)]="form.password"
+                                               required
+                                               minlength="6"
+                                               #password="ngModel" />
+                                        <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
+                                            <div *ngIf="password.errors.required">Senha é obrigatória.</div>
+                                            <div *ngIf="password.errors.minlength">
+                                                A senha deve conter pelo menos 6 caractéres.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-block">
+                                            Login
+                                        </button>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+                                            Falha ao realizar o login: {{ errorMessage }}
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div class="alert alert-success" *ngIf="isLoggedIn">
+                                    Logged in as {{ roles }}.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
