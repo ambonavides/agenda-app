@@ -1,5 +1,3 @@
-import { ConfiguracaoClienteDTO } from "./configuracao-clienteDTO";
-import { EmpresaGestoraDTO } from "./empresa-gestoraDTO";
 import { UsuarioDTO } from "./usuarioDTO";
 
 export class ClienteDTO{
@@ -7,7 +5,6 @@ export class ClienteDTO{
     codigo: string;
     nomeFantasia: string;
     cnpj: string;
-    configuracaoClientesDTO: ConfiguracaoClienteDTO[];
     usuarioCadastroDTO: UsuarioDTO;
 
     constructor(){
@@ -15,7 +12,6 @@ export class ClienteDTO{
         this.codigo = null;
         this.cnpj = null;
         this.nomeFantasia = null;
-        this.configuracaoClientesDTO = new Array<ConfiguracaoClienteDTO>();
         this.usuarioCadastroDTO = new UsuarioDTO();
     }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {MenuItem} from 'primeng/api';
-import { AuthService } from './central/service/auth.service';
-import { TokenStorageService } from './central/service/token-storage.service';
-import { UserService } from './central/service/user.service';
+import { AuthService } from './agenda/service/auth.service';
+import { TokenStorageService } from './agenda/service/token-storage.service';
+import { UserService } from './agenda/service/user.service';
 
 @Component({
   selector: 'app-root',
@@ -47,24 +47,10 @@ export class AppComponent implements OnInit {
   private carregarMenu() {
     this.items = [
       {
-        label: 'Declarações',
-        icon: 'pi pi-fw pi-file',
-        items: [{
-          label: 'PMJP',
-          icon: 'pi pi-fw pi-plus',
-          items: [
-            { label: 'Declarar', routerLink: 'principal' },
-            { label: 'Histórico', routerLink: 'historico' },
-          ]
-        }
-        ]
-      },
-      {
-        label: 'Configurações',
+        label: 'Manter',
         icon: 'pi pi-fw pi-sliders-h',
         items: [
           { label: 'Clientes', icon: 'fab fa-black-tie', routerLink: 'pesquisar-cliente' },
-          { label: 'Empresas Gestoras', icon: 'pi pi-fw pi-users', routerLink: 'pesquisar-empresa', visible: this.showAdminBoard }
         ]
       },
       {

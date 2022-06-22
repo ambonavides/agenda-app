@@ -9,27 +9,23 @@ import { DropdownModule } from 'primeng/dropdown';
 import { PaginatorModule } from 'primeng/paginator';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DeclaracaoServicosPmjpComponent } from './central/bots/declaracao-servicos-pmjp/declaracao-servicos-pmjp.component';
-import { PesquisarClienteComponent } from './central/components/login/dashboard/cliente/pesquisar-cliente/pesquisar-cliente.component';
-import { CadastrarEmpresaComponent } from './central/components/login/dashboard/empresa/cadastrar-empresa/cadastrar-empresa.component';
-import { CadastrarClienteComponent } from './central/components/login/dashboard/cliente/cadastrar-cliente/cadastrar-cliente.component';
-import { PesquisarEmpresaComponent } from './central/components/login/dashboard/empresa/pesquisar-empresa/pesquisar-empresa.component';
-import { SuperComponent } from './central/components/super-component';
+import { PesquisarClienteComponent } from './agenda/components/login/dashboard/cliente/pesquisar-cliente/pesquisar-cliente.component';
+import { CadastrarClienteComponent } from './agenda/components/login/dashboard/cliente/cadastrar-cliente/cadastrar-cliente.component';
+import { SuperComponent } from './agenda/components/super-component';
 import { MenubarModule } from 'primeng/menubar';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
 import { PasswordModule } from 'primeng/password';
 import { CalendarModule } from 'primeng/calendar';
-import { HistoricoComponent } from './central/bots/declaracao-servicos-pmjp/historico/historico.component';
-import { DashboardComponent } from './central/components/login/dashboard/dashboard.component';
-import { LoginComponent } from './central/components/login/login.component';
-import { LocalRoutingModule } from './central/components/local-routing.module';
+import { DashboardComponent } from './agenda/components/login/dashboard/dashboard.component';
+import { LoginComponent } from './agenda/components/login/login.component';
+import { LocalRoutingModule } from './agenda/components/local-routing.module';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
-import { authInterceptorProviders } from './central/helpers/auth.interceptor';
-import { AdminGuard } from './central/admin/admin.guard';
+import { authInterceptorProviders } from './agenda/helpers/auth.interceptor';
+import { AdminGuard } from './agenda/admin/admin.guard';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
 import { CPFPipe } from './compartilhado/cpf.pipe';
@@ -41,14 +37,10 @@ registerLocaleData(localePt);
   declarations: [
     AppComponent,
     SuperComponent,
-    DeclaracaoServicosPmjpComponent,
     DashboardComponent,
     PesquisarClienteComponent,
     CadastrarClienteComponent,
-    PesquisarEmpresaComponent,
-    CadastrarEmpresaComponent,
     LoginComponent,
-    HistoricoComponent,
     CPFPipe,
     CNPJPipe,
 
@@ -74,7 +66,6 @@ registerLocaleData(localePt);
     InputNumberModule,
     MessagesModule,
     MessageModule
-
   ],
   providers: [authInterceptorProviders, AdminGuard, {provide: LOCALE_ID, useValue: 'pt-BR' }],
   bootstrap: [AppComponent]

@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Page } from '../model/page';
 import {DatePipe} from '@angular/common';
 import { ClienteDTO } from '../model/clienteDTO';
-import {EmpresaGestoraDTO} from '../model/empresa-gestoraDTO';
 
 @Injectable({
   providedIn: 'root'

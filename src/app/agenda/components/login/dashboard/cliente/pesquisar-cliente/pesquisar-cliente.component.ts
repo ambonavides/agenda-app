@@ -3,14 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Message } from 'primeng/api';
-import { SuperComponent } from 'src/app/central/components/super-component';
-import { ClienteDTO } from 'src/app/central/model/clienteDTO';
-import { ConfiguracaoClienteDTO } from 'src/app/central/model/configuracao-clienteDTO';
-import { Page } from 'src/app/central/model/page';
-import { UsuarioDTO } from 'src/app/central/model/usuarioDTO';
-import { AuthService } from 'src/app/central/service/auth.service';
-import { ClienteService } from 'src/app/central/service/cliente-services';
-import { UserService } from 'src/app/central/service/user.service';
+import { SuperComponent } from 'src/app/agenda/components/super-component';
+import { ClienteDTO } from 'src/app/agenda/model/clienteDTO';
+import { Page } from 'src/app/agenda/model/page';
+import { UsuarioDTO } from 'src/app/agenda/model/usuarioDTO';
+import { AuthService } from 'src/app/agenda/service/auth.service';
+import { ClienteService } from 'src/app/agenda/service/cliente-services';
+import { UserService } from 'src/app/agenda/service/user.service';
 
 @Component({
   selector: 'app-pesquisar-cliente',
@@ -24,7 +23,6 @@ export class PesquisarClienteComponent extends SuperComponent {
   cliente: ClienteDTO;
   clienteCadastro: ClienteDTO;
   clienteFiltro: ClienteDTO;
-  configuracaoClienteDTO: ConfiguracaoClienteDTO;
   closeResult: string;
   page: Page;
   size: number;
@@ -49,7 +47,6 @@ export class PesquisarClienteComponent extends SuperComponent {
     this.cliente = new ClienteDTO();
     this.clienteCadastro = new ClienteDTO();
     this.clienteFiltro = new ClienteDTO();
-    this.configuracaoClienteDTO = new ConfiguracaoClienteDTO();
     this.buscar();
 
   }
@@ -124,21 +121,6 @@ export class PesquisarClienteComponent extends SuperComponent {
 
   public remover(cliente: ClienteDTO) {
     this.cliente = cliente;
-  }
-
-  public removerConf(param: ConfiguracaoClienteDTO) {
-    let index: number = this.clienteCadastro.configuracaoClientesDTO.indexOf(param);
-    if (index !== -1) {
-      this.clienteCadastro.configuracaoClientesDTO.splice(index, 1);
-    }
-
-  }
-
-  public removerConfEdt(param: ConfiguracaoClienteDTO) {
-    let index: number = this.cliente.configuracaoClientesDTO.indexOf(param);
-      if (index !== -1) {
-        this.cliente.configuracaoClientesDTO.splice(index, 1);
-      }
   }
 
   public confirmaRemover() {

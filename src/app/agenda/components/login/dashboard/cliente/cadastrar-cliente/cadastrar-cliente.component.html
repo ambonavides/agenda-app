@@ -1,0 +1,69 @@
+<fieldset class="border p-4">
+  <p-messages [(value)]="msgs"></p-messages>
+  <div class="card-header py-3">
+    <p class="text-primary m-0 font-weight-bold">
+      Cliente(s)
+      <button type="button" (click)="voltar();" style="margin: 0 3px;" class="btn btn-danger btn-sm float-right">
+        <i class="fa fa fa-plus"> Cancelar</i>
+      </button>
+      
+      <button type="reset" (click)="limpar();" *ngIf="isEdicao" style="margin: 0 3px;" class="btn btn-warning btn-sm float-right">
+        <i class="fa fa fa-plus"> Limpar</i>
+      </button>
+  
+      <button type="button" (click)="salvar();" *ngIf="isEdicao" style="margin: 0 3px;" class="btn btn-primary btn-sm float-right">
+        <i class="fa fa fa-plus"> Salvar</i>
+      </button>
+    </p>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+
+      <div class="col-md-6">
+          <div class="form-group">
+              <label>Nome: *</label>
+              <input type="text" 
+                    required
+                    name="nomeFantasia" 
+                    class="form-control" 
+                    maxlength="80" 
+                    [disabled]="!isEdicao"
+                    [(ngModel)]="clienteCadastro.nomeFantasia" >
+          </div>
+      </div>
+
+      <div class="col-md-3">
+          <div class="form-group">
+              <label>Código: *</label>
+              <input type="text"
+                    required
+                    name="codigo"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                    class="form-control" id="codigo" 
+                    [disabled]="!isEdicao"
+                    [(ngModel)]="clienteCadastro.codigo" >
+          </div>
+      </div>
+      
+      <div class="col-md-3">
+          <div class="form-group">
+              <label>CNPJ: *</label>
+              <input type="text"
+                    required
+                    name="cnpj"
+                    mask="00.000.000/0000-00"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                    class="form-control" 
+                    [disabled]="!isEdicao"
+                    [(ngModel)]="clienteCadastro.cnpj" >
+          </div>
+      </div>
+
+      <hr/>
+
+      <div class="col-md-12">
+    </div>
+  </div>
+</fieldset>

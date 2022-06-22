@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SuperComponent } from 'src/app/central/components/super-component';
-import { ClienteDTO } from 'src/app/central/model/clienteDTO';
-import { ConfiguracaoClienteDTO } from 'src/app/central/model/configuracao-clienteDTO';
-import { SistemaDTO } from 'src/app/central/model/sistemaDTO';
-import { ClienteService } from 'src/app/central/service/cliente-services';
-import { SistemaService } from 'src/app/central/service/sistema-service';
+import { SuperComponent } from 'src/app/agenda/components/super-component';
+import { ClienteDTO } from 'src/app/agenda/model/clienteDTO';
+import { SistemaDTO } from 'src/app/agenda/model/sistemaDTO';
+import { ClienteService } from 'src/app/agenda/service/cliente-services';
+import { SistemaService } from 'src/app/agenda/service/sistema-service';
 import * as _ from 'lodash';
 import { Message } from 'primeng/api';
-import { UsuarioDTO } from 'src/app/central/model/usuarioDTO';
-import { AuthService } from 'src/app/central/service/auth.service';
+import { UsuarioDTO } from 'src/app/agenda/model/usuarioDTO';
+import { AuthService } from 'src/app/agenda/service/auth.service';
 
 @Component({
   selector: 'app-cadastrar-cliente',
@@ -28,7 +27,6 @@ export class CadastrarClienteComponent extends SuperComponent {
   path = 'pesquisar-cliente';
   cliente: ClienteDTO;
   clienteCadastro: ClienteDTO;
-  configuracaoClienteDTO: ConfiguracaoClienteDTO;
 
   constructor(
     protected modalService: NgbModal,
@@ -48,7 +46,6 @@ export class CadastrarClienteComponent extends SuperComponent {
     let editar: any;
     this.cliente = new ClienteDTO();
     this.clienteCadastro = new ClienteDTO();
-    this.configuracaoClienteDTO = new ConfiguracaoClienteDTO();
     
     this.sistemaService.listar().subscribe(
       retorno =>{
@@ -68,9 +65,6 @@ export class CadastrarClienteComponent extends SuperComponent {
         this.clienteService.buscarPorId(id).subscribe(
           retorno =>{
             this.clienteCadastro = retorno;
-            retorno.configuracaoClientesDTO.forEach(configuracao =>{
-              this.configuracaoClienteDTO = configuracao;
-            })
           },
           err =>{
             if(!editar){
@@ -85,10 +79,7 @@ export class CadastrarClienteComponent extends SuperComponent {
   }
 
   public salvar() {
-    
-    this.sistemas.forEach(sistema =>{
-      this.configuracaoClienteDTO.sistemaDTO = sistema;
-      this.clienteCadastro.configuracaoClientesDTO.push(this.configuracaoClienteDTO);
+    console.log("chegou aqui");
       this.clienteCadastro.usuarioCadastroDTO.id = this.userAuth.id;
       this.clienteService.salvar(this.clienteCadastro).subscribe(
         data => {
@@ -101,11 +92,6 @@ export class CadastrarClienteComponent extends SuperComponent {
         }
       );
       this.navigate(`/${this.path}`);
-    });
-  }
-
-  novaConf() {
-    this.configuracaoClienteDTO = new ConfiguracaoClienteDTO();
   }
 
   voltar(){
