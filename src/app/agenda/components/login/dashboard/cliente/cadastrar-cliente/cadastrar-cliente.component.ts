@@ -52,8 +52,10 @@ export class CadastrarClienteComponent extends SuperComponent {
         this.sistemas = retorno;
       },
       err =>{
-        this.msgs = [];
-        this.msgs.push({severity:'error', detail:'Não foi possível exibir os dados!'});
+        if(!editar){
+          this.msgs = [];
+          this.msgs.push({severity:'error', detail:'Não foi possível exibir os dados!'});
+        }
       }
     );
 
@@ -79,7 +81,6 @@ export class CadastrarClienteComponent extends SuperComponent {
   }
 
   public salvar() {
-    console.log("chegou aqui");
       this.clienteCadastro.usuarioCadastroDTO.id = this.userAuth.id;
       this.clienteService.salvar(this.clienteCadastro).subscribe(
         data => {
