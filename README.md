@@ -1,5 +1,14 @@
 # Agenda
 
+`apt-get install nvm`
+`mvn install 14`
+`nvm install 14.16.1`
+`nvm alias default 14.16.1`
+`npm install -g @angular/cli@14`
+`npm install`
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.12.
 
 ## Development server
